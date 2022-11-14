@@ -56,7 +56,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     retv = 0
-
+    print(args)
+    print(args.filenames)
     for filename in args.filenames:
         if filename in args.ignore: continue
         # Read as binary so we can read byte-by-byte
