@@ -52,11 +52,13 @@ def fix_file(file_obj: IO[bytes]) -> int:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*', help='Filenames to fix')
+    parser.add_argument('ignore', nargs='*', help='Files to ignore')
     args = parser.parse_args(argv)
 
     retv = 0
 
     for filename in args.filenames:
+        if filename in args.ignore: continue
         # Read as binary so we can read byte-by-byte
         with open(filename, 'rb+') as file_obj:
             ret_for_file = fix_file(file_obj)
